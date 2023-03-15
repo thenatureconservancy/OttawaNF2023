@@ -11,7 +11,12 @@ All outputs on this page generated with the most recent LANDFIRE [Existing Veget
 
 
 ## Summary
+In general the Ottawa National Forest, as of 2020, had not experienced substantial conversion of natural ecosystems to developed or agricultural types, though there are some patterns to note:
 
+* It is tempting to directly compare the past and present maps-do so with caution as the classification system has been modified.
+* The Laurentian-Acadian Northern Hardwoods Forest type is still dominant regardless of classification system.
+* The aspen-birch EVT that was mapped in 2020 may have been a succession class in the historical ecosystems. It is not clear from this analysis alone if this type has changed in extent, or not.
+* Note-there are some changes in the wetland naming convention.  For example the Boreal-Laurentian Conifer Acidic Swamp and Treed Poor Fen is not represented in the BpS classification. 
 
 
 ## Chart of most prevalent Existing Vegetation Types

@@ -15,7 +15,16 @@ library(tidyverse)
 Outputs on this page compare "Past" conditions with "Present" conditions.  Results here are intended for exploration and illumination of issues to explore further.  As noted on the "Present" page there are differences in the classification scheme so direct comparisons should be viewed with caution.  
 
 ## Summary
- 
+There has not been broad whole conversion of ecosystems from one to another (explore circular chord diagram below). However, due to harvests, fire suppression and other management actions (in addition to changes in natural processes) there have been some notable changes in succession classes (see “Succession classes for most dominant Biophysical Settings”) section below:
+
+Perhaps the most interesting broad-scale change is conversion of ‘conifer’ types to ‘hardwood’, presumably due to fire suppression.
+Some ecosystems have sizable over/under-representation of succession classes on the landscape today compared to modeled historic. For example:
+
+* There is a substantial 'over-representation' of succession class D in the Boreal Acid Peatland.
+* LANDFIRE mapped almost total lack of succession classes A, B and C with the Boreal White Spruce-Fir-Hardwood-Inland ecosystem.
+* As is seen in most northern hardwood forests the late-closed succession class D was dominant historically, and way under-represented on the landscape today. 
+
+These differences may or may not be ‘real’ on the ground and/or may not be a management priority.
 
 ## Looking at broad changes, vegetation conversion
 

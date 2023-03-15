@@ -4,9 +4,14 @@ title: "Past"
 LANDFIRE's [Biophysical Settings](https://landfire.gov/bps.php){target="blank"} (BpSs, aka "Historical Ecosystems") represent "the vegetation system that may have been dominant on the landscape prior to Euro-American settlement and is based on both the current biophysical environment and an approximation of the historical disturbance regime." (from https://landfire.gov/bps.php). We will use this data to explore the most prevalent BpSs in a chart and map, and also the historical disturbance data that are linked to the BpSs.
 
 ## Summary
-  
+Historically the top 10 BpSs represented ~85% of the landscape, and ~ 3% of the total area of the Ottawa being disturbed yearly. 
 
-## Chart of most prevalent Biophysical Settings
+* Cumulatively ~32K acres of the Ottawa would have been disturbed every year historically, with wind/weather/stress, insects/disease and surface fire being the dominant disturbances.
+* The Laurentian-Acadian Northern Hardwoods Forest-Hemlock, Boreal White Spruce-Fir-Hardwood Forest-Inland and 	
+Boreal Jack Pine-Black Spruce Forest - Pine Barrens BpSs covered over 50% of the Ottawa.
+* While the Ottawa was not dominated by fire-dependent ecosystems, there were important pockets of ecosystems that would have had surfance fire frequently (< 20 years between fires).
+
+## Chart of the most prevalent Biophysical Settings
 
 <br>
 
@@ -158,7 +163,7 @@ bpsChart <-
 #bpsChart
 
 # A chart with a dropdown list is created with tooltips disabled.
-bscols(widths = c(3, 10),
+bscols(widths = c(3, 12),
        filter_select("BP", 
                      "Select ecosystem", 
                      sdbps_aoi_disturbances, 

@@ -18,7 +18,7 @@ Outputs presented here are the tip of the iceberg of what can be done with these
 ## Interacting with this web report
 A few notes about using this report:
 
-* As of February 16, 2023 there has been no QAQC.  This is a demo only.
+* As of March 15, 2023 there has been no QAQC.  This is a demo only.
 * This platform is web-hosted so you can simply share a link with collaborators for their review.  
 * Maps and charts are intended to represent general patterns, and are almost always limited to most common types (e.g., ecosystems).  You can use the "zoom" tool to take a closer look.
 * All maps, input datasets and further assistance can be obtained by contacting the author, [Randy Swaty](mailto:rswaty@tnc.org).

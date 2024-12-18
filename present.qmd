@@ -7,7 +7,14 @@ library(tidyverse)
 ```
 
 
-All outputs on this page generated with the most recent LANDFIRE [Existing Vegetation Type, Cover and Height](https://landfire.gov/vegetation.php){target="blank"} datasets, which represent conditions on the ground in 2020.  
+LANDFIRE's [Existing Vegetation Type, Cover and Height](https://landfire.gov/vegetation.php){target="blank"} datasets describe vegetation conditions.
+
+-   Existing Vegetation Type (EVT) - represents the current distribution of the terrestrial ecological systems classification, developed by NatureServe for the western hemisphere, through 2016.
+-   Existing Vegetation Cover (EVC) - represents the vertically projected percent cover of the live canopy layer for a 30-m cell.
+-   Existing Vegetation Height (EVH) - represents the average height of the dominant vegetation for a 30-m cell.
+
+[Read more about LANDFIRE Vegetation Products](https://landfire.gov/vegetation.php){target="blank"}
+
 
 
 ## Summary
@@ -19,7 +26,11 @@ In general the Ottawa National Forest, as of 2020, had not experienced substanti
 * Note-there are some changes in the wetland naming convention.  For example the Boreal-Laurentian Conifer Acidic Swamp and Treed Poor Fen is not represented in the BpS classification. 
 
 
-## Chart of most prevalent Existing Vegetation Types
+## Most Prevalent Existing Vegetation Types
+
+<br>
+
+![](images/evt.jpg){width="100%"}
 
 ```{r evt chart, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 evtname <- read.csv(file = "data/evt_aoi_attributes.csv") %>%
@@ -49,16 +60,13 @@ evtChart
 
 <br>
 
-## Map of most prevalent Existing Vegetation Types
+
+
+## Existing Vegetation Cover
+
+![](images/evc.jpg){width=100%}
 
 <br>
-
-![](images/evt.jpg){width=100%}
-
-<br>
-
-
-## Chart of Existing Vegetation Cover
 
 ```{r evc chart, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 evcname <- read.csv("data/evc_aoi_attributes.csv")
@@ -116,37 +124,59 @@ evcgroup <- evcgroup %>% mutate(label = if_else(type %in% c("Tree", "Shrub", "He
 evclabel.list <- evcgroup$label
 evcgroup <- evcgroup %>% mutate(label = fct_rev(factor(label, evclabel.list)))
 
-# create factor level colors for legend
-cols <- c("Tree" = "#196F3D", "Shrub" = "#229954", "Herb" = "#52BE80", "Open Water" = "#7FB3D5",
-          "Other" = "#808B96")
+
+
+# create factor level colors for legend (original from Myles)
+## cols <- c("Tree" = "#196F3D", "Shrub" = "#229954", "Herb" = "#52BE80", "Open Water" = "#7FB3D5",
+##          "Other" = "#808B96")
+
+# join in custom cols column to color bars by specific label
+
+evc_group_cols <- read.csv("data/evc_group_cols.csv")
+
+evcgroup <- left_join(evcgroup, evc_group_cols, by = "label")
+
+evcgroup$label <- factor(evcgroup$label, levels = rev(evcgroup$label))
+
+evcgroup <- evcgroup %>%
+  filter(REL_PERCENT > 0.01)
 
 # plot
 evcChart <-
-  ggplot(data = evcgroup, aes(x = label, y = REL_PERCENT, fill = legend)) +
+  ggplot(data = evcgroup, aes(x = label, y = REL_PERCENT, fill = colors)) +
   geom_bar(stat = "identity") +
   labs(
     title = "Existing Vegetation Cover",
-    subtitle = "Represents canopy cover per dominant lifeform, ca 2020",
-    caption = "\nData from landfire.gov.",
-    x = "",
-    y = "Percent of landscape") +
-  scale_fill_manual(values = cols, name = "") +
+    caption = "Data from landfire.gov; Chart © Randy Swaty",
+    x = "amount of landscape",
+    y = "most dominant lifeform") +
+  scale_fill_identity() +
   coord_flip() +
-  theme_bw(base_size = 14)
+  theme_classic(base_size = 12)+
+  theme(legend.position = "none") 
+
 
 evcChart
+
+
 
 ```
 
 <br>
 
-## Map of Existing Vegetation Cover
 
-![](images/evc.jpg){width=100%}
 
-## Chart of Existing Vegetation Height
+
+## Existing Vegetation Height
+
+<br>
+
+![](images/evh.jpg){width=100%}
+
+<br>
 
 ```{r evh chart, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
 
 # load evh attribute table
 evhname <- read.csv(file = "data/evh_aoi_attributes.csv")
@@ -198,31 +228,39 @@ evhlabel.list <- evhgroup$label
 evhgroup <- evhgroup %>% mutate(label = fct_rev(factor(label, evhlabel.list)))
 
 # create factor level colors for legend
-cols <- c("Tree" = "#196F3D", "Shrub" = "#229954", "Herb" = "#52BE80", "Open Water" = "#7FB3D5",
-          "Other" = "#808B96")
+##cols <- c("Tree" = "#196F3D", "Shrub" = "#229954", "Herb" = "#52BE80", "Open Water" = "#7FB3D5","Other" = "#808B96")
 
+# join in custom cols column to color bars by specific label
+
+evh_group_cols <- read.csv("data/evh_group_cols.csv")
+
+evhgroup <- left_join(evhgroup, evh_group_cols, by = "label")
+
+evhgroup$label <- factor(evhgroup$label, levels = rev(evhgroup$label))
+
+evhgroup <- evhgroup %>%
+  filter(REL_PERCENT > 0.01)
 
 # plot
 evhChart <-
-ggplot(data = evhgroup, aes(x = label, y = REL_PERCENT, fill = legend)) +
+ggplot(data = evhgroup, aes(x = label, y = REL_PERCENT, fill = colors)) +
   geom_bar(stat = "identity") +
   labs(
     title = "Existing Vegetation Height",
-    subtitle = "Represents canopy height of dominant lifeform ca2020",
-    caption = "\nData from landfire.gov.",
+    caption = "Data from landfire.gov; Chart © Randy Swaty",
     x = "",
-    y = "Percent of landscape") +
-  scale_fill_manual(values = cols, name = "") +
+    y = "percent of landscape") +
+  scale_fill_identity() +
   coord_flip() +
-  theme_bw(base_size = 14)
+  theme_classic(base_size = 12)+
+  theme(legend.position = "none")
 
 evhChart
+
 ```
 
-<br>
 
-## Map of Existing Vegetation Height
 
-![](images/evh.jpg){width=100%}
+
 
 
